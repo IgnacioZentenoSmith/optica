@@ -1,2 +1,2 @@
 # Snellen 
-proyecto gestion de optica 1
+proyecto gestion de optica 2
