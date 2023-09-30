@@ -3,23 +3,34 @@ version: "3"
 services:
   backend:
     build: ./backend
-    command: sh -c "cd backend && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "python3 manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ./backend:/backend
+      - ../archivos:/backend/backend/media/uploads/:rw
     ports:
       - "8000:8000"
+    networks:
+      - opticanostra-network
+    depends_on: 
+      - postgres_app
     env_file:
       - ./backend/backend/backend/.env
+    
 
   frontend:
     build: ./frontend
     ports:
       - "3000:3000"
+    networks:
+      - opticanostra-network
+    depends_on: 
+      - postgres_app
 
   postgres_app:
     image: postgres:15.3-alpine3.18
     ports:
       - "5432:5432"
+    networks:
+      - opticanostra-network
     restart: always
     environment:
       - POSTGRES_USER=root
@@ -30,3 +41,7 @@ services:
       
 volumes:
   snellendb:
+
+networks:
+  opticanostra-network:
+    external: true
