@@ -5,7 +5,7 @@ services:
     build: ./backend
     command: sh -c "python3 manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ./archivos:/backend/backend/media/uploads/:rw
+      - ../archivos:/backend/backend/media/uploads/:rw
     ports:
       - "8000:8000"
     networks:
@@ -37,7 +37,7 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=test
     volumes:
-      - ./bbdd:/var/lib/postgresql/data:rw
+      - snellendb:/var/lib/postgresql/data:rw
       
 volumes:
   snellendb:
