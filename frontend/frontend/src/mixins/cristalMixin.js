@@ -190,7 +190,7 @@ export const cristalMixin = {
                 })
         },
         getProveedores() {
-            axios.get(`http://localhost:8000/backend/api/v1/drf/proveedores/`, {
+            axios.get(`http://localhost:8000/api/v1/drf/proveedores/`, {
                 'headers': {
                     'Authorization': 'Bearer ' + this.$store.state.access,
                 }
