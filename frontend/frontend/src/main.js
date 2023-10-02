@@ -6,7 +6,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-axios.defaults.baseURL = 'http://34.66.54.250/'
+//axios.defaults.baseURL = 'http://localhost:8000/'
+axios.defaults.baseURL = process.env.BASE_URL;
 
 Vue.config.productionTip = false
 

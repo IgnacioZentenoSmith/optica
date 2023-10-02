@@ -10,8 +10,9 @@ services:
       - "8000:8000"
     networks:
       - opticanostra-network
+    restart: always
     depends_on: 
-      - postgres_app
+      - mysql
     env_file:
       - ./backend/backend/backend/.env
     
@@ -23,24 +24,25 @@ services:
     networks:
       - opticanostra-network
     depends_on: 
-      - postgres_app
+      - mysql
+    env_file:
+      - ./frontend/frontend/.env
 
-  postgres_app:
-    image: postgres:15.3-alpine3.18
+  mysql:
+    image: mysql:latest
     ports:
-      - "5432:5432"
+      - "3306:3306"
     networks:
       - opticanostra-network
     restart: always
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=test
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: opticanostra
     volumes:
-      - snellendb:/var/lib/postgresql/data:rw
-      
+      - opticanostra-db:/var/lib/mysql:rw
+
 volumes:
-  snellendb:
+  opticanostra-db:
 
 networks:
   opticanostra-network:
